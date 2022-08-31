@@ -1,2 +1,3 @@
-# react-lab
-react lab
+# React Lab
+
+### `npm start`
