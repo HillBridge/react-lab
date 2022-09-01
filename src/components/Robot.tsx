@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Robot.module.css'
 
 interface root {
   id: number
@@ -8,11 +9,11 @@ interface root {
 
 const Robot: React.FC<root> = ({id,name,email}) => {
   return (
-    <li>
+    <div className={styles.cardContainer}>
       <img src={`https://robohash.org/${id}`} alt="logo" />
-      <p>{name}</p>
+      <h2>{name}</h2>
       <p>{email}</p>
-    </li>
+    </div>
   )
 }
 
