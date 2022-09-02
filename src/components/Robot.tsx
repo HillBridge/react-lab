@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styles from './Robot.module.css'
 
 interface root {
@@ -7,7 +7,7 @@ interface root {
   email: string
 }
 
-const Robot: React.FC<root> = ({id,name,email}) => {
+const Robot: React.FC<root> = ({ id, name, email }) => {
   return (
     <div className={styles.cardContainer}>
       <img src={`https://robohash.org/${id}`} alt="logo" />
@@ -17,5 +17,4 @@ const Robot: React.FC<root> = ({id,name,email}) => {
   )
 }
 
-
-export default Robot;
+export default Robot
