@@ -15,15 +15,24 @@ class App extends React.Component<Props, State> {
     super(props)
     this.state = {
       robotList: [],
-      count: 0
+      count: 0,
     }
   }
-
+  // 初始化，dom出现
   componentDidMount(): void {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
-      .then((res) => this.setState({ robotList: res}))
+      .then((res) => this.setState({ robotList: res }))
   }
+  // 更新
+  componentDidUpdate(
+    prevProps: Readonly<Props>,
+    prevState: Readonly<State>,
+    snapshot?: any
+  ): void {}
+  // 销毁
+  componentWillUnmount(): void {}
+
   render() {
     return (
       <div className={styles.app}>
@@ -33,17 +42,13 @@ class App extends React.Component<Props, State> {
         </div>
         <button
           onClick={() => {
-            this.setState(
-              (prevState) => {
-                return { count: prevState.count + 1 }
-              }
-            )
-            
-             this.setState(
-               (prevState) => {
-                 return { count: prevState.count + 1 }
-               }
-             )
+            this.setState((prevState) => {
+              return { count: prevState.count + 1 }
+            })
+
+            this.setState((prevState) => {
+              return { count: prevState.count + 1 }
+            })
           }}
         >
           add {this.state.count}
