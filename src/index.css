@@ -15,6 +15,6 @@ code {
 
 @font-face {
   font-family: 'Slidefu';
-  src: url('./assets/fonts/Slidefu-Regular-2.ttf');
+  src: local('Slidefu'), url('./assets/fonts/Slidefu-Regular-2.ttf') format('truetype');
 }
 
