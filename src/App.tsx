@@ -14,13 +14,22 @@ const App: React.FC = () => {
   const [count, setCount] = useState<number>(0)
   const [robotList, setRobotList] = useState<any>([])
   useEffect(() => {
+    console.log('dd')
     document.title = `点击${count}次`
   }, [count])
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((res) => setRobotList(res))
+  useEffect( () => {
+    console.log("in")
+    const fetchData = async () => {
+      const responseData = await fetch('https://jsonplaceholder.typicode.com/users')
+      // .then((response) => response.json())
+      // .then((res) => setRobotList(res))
+      const data = await responseData.json()
+      setRobotList(data)
+    }
+
+    fetchData()
+    
   }, [])
   return (
     <div className={styles.app}>
