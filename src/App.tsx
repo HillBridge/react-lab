@@ -13,23 +13,31 @@ interface State {
 const App: React.FC = () => {
   const [count, setCount] = useState<number>(0)
   const [robotList, setRobotList] = useState<any>([])
+  const [loading, setLoading] = useState<Boolean>(false)
+  const [error, setError] = useState<string>('')
   useEffect(() => {
-    console.log('dd')
     document.title = `点击${count}次`
   }, [count])
 
-  useEffect( () => {
-    console.log("in")
+  useEffect(() => {
     const fetchData = async () => {
-      const responseData = await fetch('https://jsonplaceholder.typicode.com/users')
-      // .then((response) => response.json())
-      // .then((res) => setRobotList(res))
-      const data = await responseData.json()
-      setRobotList(data)
+     try {
+       const responseData = await fetch(
+         'https://jsonplaceholder.typicode.com/users'
+       )
+       // .then((response) => response.json())
+       // .then((res) => setRobotList(res))
+       const data = await responseData.json()
+       setRobotList(data)
+     } catch (error) {
+      if(error instanceof Error){
+        setError(error.message)
+      }
+     }
+      setLoading(true)
     }
 
     fetchData()
-    
   }, [])
   return (
     <div className={styles.app}>
@@ -45,11 +53,16 @@ const App: React.FC = () => {
         add {count}
       </button>
       <ShoppingCart />
-      <div className={styles.robotList}>
-        {robotList.map((r) => (
-          <Robot id={r.id} key={r.id} name={r.name} email={r.email} />
-        ))}
-      </div>
+      {!error || (error !== '' && <div>错误信息：{error}</div>)}
+      {loading ? (
+        <div className={styles.robotList}>
+          {robotList.map((r) => (
+            <Robot id={r.id} key={r.id} name={r.name} email={r.email} />
+          ))}
+        </div>
+      ) : (
+        <div>loading ...</div>
+      )}
     </div>
   )
 }
