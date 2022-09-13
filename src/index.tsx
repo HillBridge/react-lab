@@ -3,18 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const defaultValue = {
-  username: 'HillBridge',
-}
-export const TextContext = React.createContext(defaultValue)
+import { AppStateProvider } from './AppState'
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <TextContext.Provider value={defaultValue}>
+  <AppStateProvider>
     <App />
-  </TextContext.Provider>
+  </AppStateProvider>
 )
 
 // If you want to start measuring performance in your app, pass a function
