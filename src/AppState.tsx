@@ -16,12 +16,12 @@ export const AppSetStateContext =
   )
 
 export const AppStateProvider: React.FC<PropsWithChildren<{}>> = (props) => {
-
+  const children = React.Children.toArray(props.children)
   const [state, setState] = useState(defaultContextValue)
   return (
     <AppContext.Provider value={state}>
       <AppSetStateContext.Provider value={setState}>
-        {props.children}
+        {children[0]}
       </AppSetStateContext.Provider>
     </AppContext.Provider>
   )
