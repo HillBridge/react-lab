@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from './assets/images/logo.svg'
 import Robot from './components/Robot'
+import RobotDiscount from './components/RobotDiscount'
 import ShoppingCart from './components/ShoppingCart'
 import styles from './App.module.css'
 
@@ -21,19 +22,19 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-     try {
-       const responseData = await fetch(
-         'https://jsonplaceholder.typicode.com/users'
-       )
-       // .then((response) => response.json())
-       // .then((res) => setRobotList(res))
-       const data = await responseData.json()
-       setRobotList(data)
-     } catch (error) {
-      if(error instanceof Error){
-        setError(error.message)
+      try {
+        const responseData = await fetch(
+          'https://jsonplaceholder.typicode.com/users'
+        )
+        // .then((response) => response.json())
+        // .then((res) => setRobotList(res))
+        const data = await responseData.json()
+        setRobotList(data)
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message)
+        }
       }
-     }
       setLoading(true)
     }
 
@@ -56,9 +57,18 @@ const App: React.FC = () => {
       {!error || (error !== '' && <div>错误信息：{error}</div>)}
       {loading ? (
         <div className={styles.robotList}>
-          {robotList.map((r) => (
-            <Robot id={r.id} key={r.id} name={r.name} email={r.email} />
-          ))}
+          {robotList.map((r, i) =>
+            i % 2 === 0 ? (
+              <RobotDiscount
+                id={r.id}
+                key={r.id}
+                name={r.name}
+                email={r.email}
+              />
+            ) : (
+              <Robot id={r.id} key={r.id} name={r.name} email={r.email} />
+            )
+          )}
         </div>
       ) : (
         <div>loading ...</div>

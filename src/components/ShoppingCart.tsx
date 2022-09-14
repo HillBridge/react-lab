@@ -45,7 +45,7 @@ class ShoppingCart extends React.Component<Props, State> {
                 <ul>
                   {
                     value.shoppingCart.items.map( val => {
-                      return <li>{val.name}</li>
+                      return <li key={val.id}>{val.name}</li>
                     })
                   }
                 </ul>
