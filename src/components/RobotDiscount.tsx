@@ -1,11 +1,16 @@
 import React, { useContext  } from 'react'
 import styles from './Robot.module.css'
 import { AppContext } from '../AppState'
-import { withAddToCart } from "./AddToCart";
-import { RobotProps } from './Robot'
+import { useAddToCart } from './AddToCart'
+export interface RobotProps {
+  id: number
+  name: string
+  email: string
+}
 
-const Robot: React.FC<RobotProps> = ({ id, name, email, addToCart }) => {
+const Robot: React.FC<RobotProps> = ({ id, name, email }) => {
   const appValue = useContext(AppContext)
+  const addToCart = useAddToCart()
   return (
     <div className={styles.cardContainer}>
       <img src={`https://robohash.org/${id}`} alt="logo" />
@@ -18,4 +23,4 @@ const Robot: React.FC<RobotProps> = ({ id, name, email, addToCart }) => {
   )
 }
 
-export default withAddToCart(Robot)
+export default Robot
